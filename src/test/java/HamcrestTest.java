@@ -34,8 +34,8 @@ public class HamcrestTest {
 
     @Test
     public void objectMatchersTest() {
-        Todo todo1 = new Todo("1","Learn Hamcrest","Important");
-        Todo todo2 = new Todo("1","Learn Hamcrest","Important");
+        Todo todo1 = new Todo(1,"Learn Hamcrest","Important");
+        Todo todo2 = new Todo(1,"Learn Hamcrest","Important");
         MatcherAssert.assertThat(todo1,Matchers.hasProperty("summary"));
         MatcherAssert.assertThat(todo1,Matchers.hasProperty("summary",
                 Matchers.equalTo("Learn Hamcrest")));
