@@ -23,13 +23,4 @@ public class Todo {
     public String getDesc() {
         return desc;
     }
-
-    @Override
-    public String toString() {
-        return "Todo{" +
-                "id=" + id +
-                ", summary='" + summary + '\'' +
-                ", desc='" + desc + '\'' +
-                '}';
-    }
 }
