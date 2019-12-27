@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="HamcrestTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-12-27T04:07:51" hostname="admin1-desktop" time="0.029">
-  <properties/>
-  <testcase name="objectMatchersTest" classname="HamcrestTest" time="0.029"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
