@@ -213,4 +213,152 @@ public class FundooPushTest {
         Assert.assertEquals("Redirect updated Successfully", message);
         Assert.assertEquals(200, statusCode);
     }
+
+    @Test
+    public void givenRedirectOperation_OnGetRedirect_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .when()
+                .get("https://fundoopush-backend-dev.bridgelabz.com/redirects");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("All Redirects retrieved Successfully", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnRedirectDeleteId_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." +
+                        "eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .when()
+                .body("{\"_id\": \"5e098a684d22670032530f2b\"}")
+                .post("https://fundoopush-backend-dev.bridgelabz.com/redirects/delete");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("Redirect deleted Successfully", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnRedirectBlRedirecyts_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("https://fundoopush-backend-dev.bridgelabz.com/bl-redirects");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("All Redirects retrieved Successfully", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnHashtagEdit_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .when()
+                .body("{\"redirect_id\": \"5cdfbb5e274bba374fe68edb\",\"hashtag\": \"#bridgelabz #solutions #mumbai #bangalore #fundoopush\"}")
+                .post("https://fundoopush-backend-dev.bridgelabz.com/hashtag/edit");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("Hashtag edit done Successfully", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnRedirectHashtag_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .formParam("hashtagname", "#mumbai")
+                .when()
+                .get("https://fundoopush-backend-dev.bridgelabz.com/redirects/hashtag/%23mumbai");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("Hashtag sent Successfully", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnRedirectWebScraping_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .when()
+                .body("{\"url\": \"https://www.deccanchronicle.com/technology/in-other-news/270319/companies-that-are-changing-the-way-education-is-being-delivered-to-st.html\"}")
+                .post("https://fundoopush-backend-dev.bridgelabz.com/web-scraping");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("Successfully scrapped data", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnRedirectSearchHashTag_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVkNjY1NjZhNzg4ODEwMDAzOTcyYTExNCJ9LCJpYXQiOjE1Nzc3NjcxODQsImV4cCI6MTU3Nzg1MzU4NH0." +
+                        "BXXt5KCuPKJMIEmzxvvyot5tr03iCvuckLlMnvT5rvQ")
+                .when()
+                .body("{\"hashtag\": \"#bridgelabz\"}")
+                .post("https://fundoopush-backend-dev.bridgelabz.com/search/hashtag");
+        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        String message = (String) object.get("message");
+
+        Assert.assertEquals("Successfully searched data", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+    @Test
+    public void givenRedirectOperation_OnAddJobs_ShouldReturnCorrectStatusCode() throws ParseException {
+        Response response = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .header("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVlMDljYzU0NGQyMjY3MDAzMjUzMGY4ZiJ9LCJpYXQiOjE1Nzc3ODk1NTcsImV4cCI6MTU3Nzg3NTk1N30.VPKv9B-MMijXcI1AxW8FVKQLxRpqBm5OVii1H0dP3bM")
+                .body("{ \"redirect_id\": \"5cdfbb5e274bba374fe68edb\", \"years_of_experience\": \"1\", \"salary\": \"3.6\", \"location\": \"Mumbai\", \"company_profile\": \"Ideation\", \"hashtag\": \"#bridgelabz #fun #awesome\"}")
+                .when()
+                .post("https://fundoopush-backend-dev.bridgelabz.com/jobs");
+//        ResponseBody body = response.getBody();
+        int statusCode = response.getStatusCode();
+//        JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+//        String message = (String) object.get("message");
+
+//        Assert.assertEquals("Successfully searched data", message);
+        Assert.assertEquals(200, statusCode);
+    }
+
+
+
 }
