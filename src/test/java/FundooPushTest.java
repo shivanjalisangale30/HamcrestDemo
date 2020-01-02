@@ -350,63 +350,50 @@ public class FundooPushTest {
     }
 
     @Test
-    public void givenRedirectOperation_OnAddJobs_ShouldReturnCorrectStatusCode() throws ParseException {
+    public void givenUser_JobAdded_ShouldReturnCorrectStatusCode() throws ParseException {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .header("token", tokenValue)
-                .body("{ \\\"redirect_id\\\": \\\"5d5e306726f53e1bfaade87f\\\", \\\"years_of_experience\\\": \\\"1\\\", \\\"salary\\\": \\\"3.6\\\", \\\"location\\\": \\\"Mumbai\\\", \\\"company_profile\\\": \\\"Ideation\\\", \\\"hashtag\\\": \\\"#bridgelabz #fun #awesome\\\"}\"")
+                .body("{\"redirect_id\":\"5e0b4281fe754c00321c8631\",\"years_of_experience\":\"1\",\"salary\":\"3.6\",\"location\":\"Mumbai\",\"company_profile\":\"Ideation\"}")
                 .when()
-                .post("https://fundoopush-backend-dev.bridgelabz.com/jobs\n");
+                .post("https://fundoopush-backend-dev.bridgelabz.com/jobs");
         ResponseBody body = response.getBody();
-        int statusCode = response.getStatusCode();
         JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        int statusCode = response.getStatusCode();
         String message = (String) object.get("message");
-
-        Assert.assertEquals("Successfully searched data", message);
         Assert.assertEquals(200, statusCode);
-
+        Assert.assertEquals("Jobs added successfully", message);
     }
 
     @Test
-    public void givenRedirectOperation_OnJobsHashtagAdded_ShouldReturnCorrectStatusCode() throws ParseException {
+    public void givenUser_JobHashtagAdded_ShouldReturnCorrectStatusCode() throws ParseException {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .header("token", tokenValue)
-                .body("{\n" +
-                        "  \"job_id\": \"5e09f7f64d22670032530fef\",\n" +
-                        "  \"hashtag\": \"#Bridgelabz #Mumbai #Bangalore\"\n" +
-                        "}")
+                .body("{\"job_id\": \"5e0df23122b60600323eb715\",\"hashtag\": \"#bridgelabz\"}")
                 .when()
                 .post("https://fundoopush-backend-dev.bridgelabz.com/jobs/hashtag/add");
         ResponseBody body = response.getBody();
-        int statusCode = response.getStatusCode();
         JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
+        int statusCode = response.getStatusCode();
         String message = (String) object.get("message");
-
-        Assert.assertEquals("Successfully searched data", message);
         Assert.assertEquals(200, statusCode);
+        Assert.assertEquals("Jobs hashtag added successfully", message);
     }
 
     @Test
-    public void givenRedirectOperation_OnJobsHashtagRemove_ShouldReturnCorrectStatusCode() throws ParseException {
+    public void givenUser_JobHashtagRemove_ShouldReturnCorrectStatusCode() throws ParseException {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .header("token", tokenValue)
-                .body("{\n" +
-                        "  \"job_id\": \"5d6534571a81a865c0edf53a\",\n" +
-                        "  \"hashtag_id\": \"5d662f00f149c627ab5d3efd\"\n" +
-                        "}")
+                .body("{ \"job_id\": \"5e0df23122b60600323eb715\",\"hashtag_id\": \"5d39926ab19c56004f263df6\"}")
                 .when()
                 .post("https://fundoopush-backend-dev.bridgelabz.com/jobs/hashtag/remove");
         ResponseBody body = response.getBody();
-        int statusCode = response.getStatusCode();
         JSONObject object = (JSONObject) new JSONParser().parse(body.prettyPrint());
-        String message = (String) object.get("message");
-
-        Assert.assertEquals("Successfully searched data", message);
-        Assert.assertEquals(200, statusCode);
+        int statusCode = response.getStatusCode();
     }
 }
